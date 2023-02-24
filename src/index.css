@@ -106,3 +106,18 @@ code {
 	background-image: url("https://images4.alphacoders.com/150/thumbbig-150168.webp");
 	background-size: contain;
 }
+
+nav {
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	background: #ccc;
+	padding: 20px;
+  }
+  
+  /* Style the list inside the menu */
+  nav ul {
+	list-style-type: none;
+	padding: 0;
+  }
+  
