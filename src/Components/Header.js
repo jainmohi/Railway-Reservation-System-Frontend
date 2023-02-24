@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 //import '../assets/common.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Helper from "./Helper";
 //import Home from "./Home";
 //import Login from "./Login";
 //import Register from "./Register";
 //import Footer from "./Footer";
 function Header(props)
 {
+    var {isLoggedIn} = Helper();
 
     // var ShowButtons = ()=>{
     //     if(true)
@@ -18,8 +20,26 @@ function Header(props)
     //        return <button onClick={props.SignIn}>Log In</button>
     //     }
     // }
-    
-    return <div>
+    var showButtons = () =>{
+      // debugger;
+      console.log(isLoggedIn());
+        if(isLoggedIn()){
+           return <button className="btn btn-success" onClick={props.signOut}>Log out</button>
+        }
+        else{
+           return <>
+                  <li className="nav-item mx-2">
+                    <Link to={"/login"}>Login</Link>
+                  </li>
+                  <li className="nav-item mx-2">
+                    <Link to={"/register"}>Register</Link>
+                  </li>
+                </>
+        }
+    }
+    return (
+    <>
+    <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand" href="#">Railway Reservation System</a>
       <button
@@ -38,18 +58,19 @@ function Header(props)
           <li className="nav-item active mx-2 ">
             <Link to={"/"}>Home</Link>
           </li>
-          <li className="nav-item mx-2">
-            <Link to={"/login"}>Login</Link>
-          </li>
-          <li className="nav-item mx-2">
-            <Link to={"/register"}>Register</Link>
-          </li>
           {/* <li className="nav-item mx-2">
             <Link to={"/admin"}>Admin</Link>
           </li> */}
           <li className="nav-item mx-2">
             <Link to={"/about"}>About Us</Link>
           </li>
+          {/* <li className="nav-item mx-2">
+            <Link to={"/login"}>Login</Link>
+          </li>
+          <li className="nav-item mx-2">
+            <Link to={"/register"}>Register</Link>
+          </li> */}
+          {showButtons()}
         </ul>
       </div>
     </nav>
@@ -72,5 +93,8 @@ function Header(props)
 
 
     </div>
+    </>
+    )
+
 }
 export default Header;

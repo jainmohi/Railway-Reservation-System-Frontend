@@ -1,12 +1,13 @@
 function setSessionStorage(key, value) {
     sessionStorage.setItem(key, value);
   }
+
   function getSessionStorage(key) {
     return sessionStorage.getItem(key);
   }
   
   function isLoggedIn() {
-    var isUserLoggedIn = getSessionStorage("isloggedIn");
+    var isUserLoggedIn = getSessionStorage("isLoggedIn");
     if (isUserLoggedIn != null) {
       return isUserLoggedIn;
     } else {
@@ -15,9 +16,7 @@ function setSessionStorage(key, value) {
   }
   
   function clearStorage() {
-    sessionStorage.removeItem("isloggedIn");
-    sessionStorage.removeItem("userName");
-    sessionStorage.removeItem("token");
+    sessionStorage.clear();
   }
   
 

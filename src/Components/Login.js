@@ -75,6 +75,7 @@ export default function Login() {
             if(fields.email==response.data.email && fields.password==response.data.password)
              { 
                 setSessionStorage("userName", response.data.firstName);
+                setSessionStorage("isLoggedIn",true);
                 setSessionStorage("token", "1234");
                 window.alert("Logged in as "+response.data.firstName);
                  navigate("/");
