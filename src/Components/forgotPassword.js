@@ -100,7 +100,7 @@ export default function ForgotPassword() {
                 <div className="card-body">
                     <form onSubmit={forgetPassword}>
                         <div className="form-group">
-                            <label for="rmail">Email:</label> 
+                            <label for="email">Email:</label> 
                             <input type="text" className="form-control" id="email" name="email" onBlur={form.handleBlurEvent}
                                             onChange={form.handleChangeEvent}
                                             value={fields.email}/>

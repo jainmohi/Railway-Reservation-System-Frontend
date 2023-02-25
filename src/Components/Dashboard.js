@@ -7,7 +7,11 @@ import Registration from './Register';
 import About from './About';
 import Footer from './Footer';
 import ForgotPassword from './forgotPassword';
+import PassengerDetails from './passengerDetails';
 import Helper from './Helper';
+import AddTrain from './addTrain';
+import ManageTrain from './manageTrain';
+import AddStation from './addStation';
 
 export default function Dashboard(){
 
@@ -50,6 +54,10 @@ export default function Dashboard(){
                                 <Route path='/admin/dashboard' element={<Dashboard/>}/>
                             </Route> */}
                         <Route exact path="/forgotPassword" element={<ForgotPassword/>}/>
+                        <Route exact path="/passengerDetails" element={<PassengerDetails/>}/>
+                        <Route exact path="/addTrain" element={<AddTrain/>}/>
+                        <Route exact path="/manageTrain" element={<ManageTrain/>}/>
+                        <Route exact path="/addStation" element={<AddStation/>}/>
                     </Routes>
                     </div>
                     <Routes>
