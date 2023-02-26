@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState,useNavigate } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link,useNavigate } from "react-router-dom";
 //import HandleStorage from "./HandleStorage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useFormInputValidation } from "react-form-input-validation";
@@ -8,7 +8,8 @@ import axios from 'axios';
 import Helper from './Helper';
 export default function Login(props) {
 
-    // var navigate =  useNavigate();
+     var navigate =  useNavigate();
+     var {getSessionStorage,setSessionStorage} = Helper();
     const [fields, errors, form] = useFormInputValidation(
         {
           email: "",
@@ -16,15 +17,68 @@ export default function Login(props) {
         },
         {
           email: "required|email",
-          password: "required",
+          password: "required"
         }
       );
 
-    var loginFunc = (e) =>{
-      //debugger;
-      const isValid = form.validate(e);
-      props.login(fields,isValid);
-    }
+    // var loginFunc = async (e) =>{
+    //   //debugger;
+      
+    //   props.signIn(fields,isValid);
+    //   debugger;
+      
+    //   //window.location.reload(true)
+    // }
+
+    var signIn = async (event)=>{
+        //debugger;
+       //var navigate = useNavigate();
+      const isValid = await form.validate(event);
+
+        if (isValid) {
+          axios.post("http://localhost:7070/FP/users/login", {
+              email: fields.email,
+              password: fields.password
+            })
+            .then(function (response) {
+              //.push("/login")
+              debugger;
+              console.log(response);
+              if(fields.email==response.data.email && fields.password==response.data.password)
+               { 
+                  setSessionStorage("userName", response.data.firstName);
+                  setSessionStorage("user", response.data);
+                  setSessionStorage("isLoggedIn",true);
+                  setSessionStorage("token", "1234");
+                  props.UpdateHeader(response.data.firstName);
+                  if(response.data.role == "ADMIN")
+                  {
+                    //debugger;
+                      setSessionStorage("isAdmin",true);
+                      navigate("/adminDashboard");
+                  }
+                  else{
+                    setSessionStorage("isAdmin",false);
+                    navigate("/");
+                  }
+                      
+                  //window.alert("Logged in as "+response.data.firstName);
+                   //navigate("/");
+                   console.log(response);
+                   //window.location.reload(true); 
+               }
+               else{
+                  window.alert("Credentials do not match");
+               }
+              console.log(response);  
+            })
+            .catch(function (error) {
+              console.log(error);
+            });   
+        
+      };
+      }
+
     return ( <div>
                 <div className="container">
     <div className="row justify-content-center">
@@ -34,18 +88,24 @@ export default function Login(props) {
                     <h4>Login</h4>
                 </div>
                 <div className="card-body">
-                    <form onSubmit={(e)=>{
-                     // debugger;
-                     e.preventDefault();
-                        loginFunc(e);
+                    <form onSubmit={signIn}>
+                        {/* // if(getSessionStorage("isAdmin"))
+                        //     navigate("/adminDashboard");
+                        // else{
+                        //     navigate("/");
+      }
                         // navigate("/");
-                    }}>
+                    // }
+                // } */}
                         <div className="form-group">
                             <label for="username">UserName:</label> 
                             <input type="text" className="form-control" id="email" name="email" 
                                     onBlur={form.handleBlurEvent}
                                     onChange={form.handleChangeEvent}
                                     value={fields.email}/>
+                            <label className="error">
+                                {errors.email? errors.email: ""}
+                            </label>
                         </div>
                         <div className="form-group mt-2">
                             <label for="password">Password:</label>
@@ -53,6 +113,9 @@ export default function Login(props) {
                                     onBlur={form.handleBlurEvent}
                                     onChange={form.handleChangeEvent}
                                     value={fields.password}/>
+                        <label className="error">
+                                {errors.password? errors.password: ""}
+                            </label>
                         </div>
                         <div className="form-group mt-3">
                         <Link to={"/forgotPassword"}>Forgot password</Link>

@@ -12,11 +12,13 @@ import Helper from './Helper';
 import AddTrain from './addTrain';
 import ManageTrain from './manageTrain';
 import AddStation from './addStation';
+import AdminDashboard from './Admin_Dashboard';
+import axios from 'axios';
 
 export default function Dashboard(){
 
 
-    var { isLoggedIn,clearStorage,getSessionStorage,login } = Helper();
+    var { isLoggedIn,clearStorage,getSessionStorage,setSessionStorage} = Helper();
     // var navigate = useNavigate();
     var [uName, setUName]  = useState("Guest");
 
@@ -38,18 +40,16 @@ export default function Dashboard(){
         // navigate("/");
     }
 
-    var signIn =()=>{
-        // navigate("/login");
-    }
+    
     return (
         <div>
             <Router>
                 <div className="home_div">
-                <Header signOut={signOut} uName={uName}/> 
+                <Header signOut={signOut} uName={uName} isLoggedIn={isLoggedIn}/> 
                     <Routes>
                     
                         <Route exact path="/" element={<Home/>}/>
-                        <Route exact path="/login" element={<Login login={login}/>}/>
+                        <Route exact path="/login" element={<Login UpdateHeader={UpdateHeader}/>}/>
                         {/* <Route exact path="/login" element={Login}/> */}
 
                         <Route exact path="/register" element={<Registration/>}/>
@@ -57,6 +57,8 @@ export default function Dashboard(){
                                 <Route path='/admin/dashboard' element={<Dashboard/>}/>
                             </Route> */}
                         <Route exact path="/forgotPassword" element={<ForgotPassword/>}/>
+                    
+                        <Route exact path="/adminDashboard" element={<AdminDashboard isLoggedIn={isLoggedIn}/>}/>
                         <Route exact path="/passengerDetails" element={<PassengerDetails/>}/>
                         <Route exact path="/addTrain" element={<AddTrain/>}/>
                         <Route exact path="/manageTrain" element={<ManageTrain/>}/>

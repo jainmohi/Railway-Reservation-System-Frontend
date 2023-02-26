@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 //import '../assets/common.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,9 +8,10 @@ import Helper from "./Helper";
 //import Register from "./Register";
 //import Footer from "./Footer";
 function Header(props)
-{
-    var {isLoggedIn,getSessionStorage} = Helper();
+{ 
 
+    var {getSessionStorage} = Helper();
+    
     // var ShowButtons = ()=>{
     //     if(true)
     //     {
@@ -22,10 +24,12 @@ function Header(props)
     // }
     var showButtons = () =>{
       // debugger;
-      console.log(isLoggedIn());
-        if(isLoggedIn()){
+      console.log(props.isLoggedIn());
+      //console.log(getSessionStorage("user").role);
+        if(props.isLoggedIn()){
            return <>
-                    <li className="nav-item mx-2 text-primary" onClick={props.signOut}><button class="btn btn-primary">Log out</button></li>
+           
+                    <li className="nav-item mx-2 text-primary"><Link to="/" onClick={props.signOut}><button class="btn btn-primary">Log out</button></Link></li>
                     <li className="nav-item mx-2 text-primary" >Welcome {props.uName}</li>
                   </>
         }
@@ -43,6 +47,7 @@ function Header(props)
     }
     return (
     <>
+    {}
     <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand" href="#">Railway Reservation System</a>
