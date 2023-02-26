@@ -1,22 +1,14 @@
 import React from 'react';
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState,useNavigate } from "react";
+import { Link } from "react-router-dom";
 //import HandleStorage from "./HandleStorage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useFormInputValidation } from "react-form-input-validation";
 import axios from 'axios';
 import Helper from './Helper';
-export default function Login() {
-    var navigate =  useNavigate();
-   // var {setSessionStorage} =  HandleStorage();
-    // var [credentials, setCredentials] = useState({uname: "", password: ""});
-    // var [message, setMessage] = useState("");
+export default function Login(props) {
 
-    // var HandleChange =(args)=>{
-    //     var copyOfCredentials = {...credentials};
-    //     copyOfCredentials[args.target.id] = args.target.value;
-    //     setCredentials(copyOfCredentials); 
-    // }
+    // var navigate =  useNavigate();
     const [fields, errors, form] = useFormInputValidation(
         {
           email: "",
@@ -28,71 +20,11 @@ export default function Login() {
         }
       );
 
-    var { setSessionStorage } = Helper();
-    var Login = async (event) =>
-    {
-            //Check the credentials by giving XHR Call
-            //Validate the user credentials 
-            //As of now we are going to hard code and check
-            
-
-
-            //-----------------------------------------------------------
-            //--------------------Hard Coded Credential Check
-            //-----------------------------------------------------------
-            //    if(credentials.uname == "mahesh@test.com" && 
-            //     credentials.password == "mahesh123")
-            //     {
-
-
-            //         setSessionStorage(credentials.uname);
-            //         setMessage("");
-            //         debugger;
-            //         props.UpdateHeader(credentials.uname);
-            //         history.push("/secure"); // u can get the url to navigate 
-            //                                  // from protected route itself
-            //                                  // and props can be used to 
-            //                                  // resolve the route
-            //     }
-            //     else
-            //     {
-            //         setCredentials({uname: "", password: ""});
-            //         setMessage("Invalid UserName / Password..Try Again");
-            //     }
-            //-----------------------------------------------------------
-            //--------------------Credential Check End Here
-            //-----------------------------------------------------------
-
-    const isValid = await form.validate(event);
-      if (isValid) {
-        axios
-          .post("http://localhost:7070/FP/users/login", {
-            email: fields.email,
-            password: fields.password
-          })
-          .then(function (response) {
-            //.push("/login")
-            if(fields.email==response.data.email && fields.password==response.data.password)
-             { 
-                setSessionStorage("userName", response.data.firstName);
-                setSessionStorage("isLoggedIn",true);
-                setSessionStorage("token", "1234");
-                window.alert("Logged in as "+response.data.firstName);
-                 navigate("/");
-                 console.log(response); 
-             }
-             else{
-                window.alert("Credentials do not match");
-             }
-            console.log(response);  
-          })
-          .catch(function (error) {
-            console.log(error);
-          });   
-      }
-    };
-
-
+    var loginFunc = (e) =>{
+      //debugger;
+      const isValid = form.validate(e);
+      props.login(fields,isValid);
+    }
     return ( <div>
                 <div className="container">
     <div className="row justify-content-center">
@@ -102,7 +34,12 @@ export default function Login() {
                     <h4>Login</h4>
                 </div>
                 <div className="card-body">
-                    <form onSubmit={Login}>
+                    <form onSubmit={(e)=>{
+                     // debugger;
+                     e.preventDefault();
+                        loginFunc(e);
+                        // navigate("/");
+                    }}>
                         <div className="form-group">
                             <label for="username">UserName:</label> 
                             <input type="text" className="form-control" id="email" name="email" 

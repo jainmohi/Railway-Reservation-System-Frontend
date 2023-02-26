@@ -8,7 +8,7 @@ import Helper from "./Helper";
 //import Footer from "./Footer";
 function Header(props)
 {
-    var {isLoggedIn} = Helper();
+    var {isLoggedIn,getSessionStorage} = Helper();
 
     // var ShowButtons = ()=>{
     //     if(true)
@@ -24,7 +24,10 @@ function Header(props)
       // debugger;
       console.log(isLoggedIn());
         if(isLoggedIn()){
-           return <button className="btn btn-success" onClick={props.signOut}>Log out</button>
+           return <>
+                    <li className="nav-item mx-2 text-primary" onClick={props.signOut}><button class="btn btn-primary">Log out</button></li>
+                    <li className="nav-item mx-2 text-primary" >Welcome {props.uName}</li>
+                  </>
         }
         else{
            return <>
@@ -34,6 +37,7 @@ function Header(props)
                   <li className="nav-item mx-2">
                     <Link to={"/register"}>Register</Link>
                   </li>
+                  <li className="nav-item mx-2 text-primary" >Welcome {props.uName}</li>
                 </>
         }
     }
@@ -72,6 +76,7 @@ function Header(props)
           </li> */}
           {showButtons()}
         </ul>
+        
       </div>
     </nav>
     {/* <script

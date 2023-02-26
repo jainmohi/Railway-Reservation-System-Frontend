@@ -106,3 +106,10 @@ code {
 	background-image: url("https://images4.alphacoders.com/150/thumbbig-150168.webp");
 	background-size: contain;
 }
+
+.buttons
+{
+    text-align: right;
+    position: absolute;
+    right: 80px;
+}

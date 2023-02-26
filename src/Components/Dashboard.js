@@ -12,7 +12,7 @@ import Helper from './Helper';
 export default function Dashboard(){
 
 
-    var { isLoggedIn,clearStorage,getSessionStorage } = Helper();
+    var { isLoggedIn,clearStorage,getSessionStorage,login } = Helper();
     // var navigate = useNavigate();
     var [uName, setUName]  = useState("Guest");
 
@@ -41,10 +41,13 @@ export default function Dashboard(){
         <div>
             <Router>
                 <div className="home_div">
-                <Header signIn={signIn} signOut={signOut}/>      
+                <Header signOut={signOut} uName={uName}/> 
                     <Routes>
+                    
                         <Route exact path="/" element={<Home/>}/>
-                        <Route exact path="/login" element={<Login/>}/>
+                        <Route exact path="/login" element={<Login login={login}/>}/>
+                        {/* <Route exact path="/login" element={Login}/> */}
+
                         <Route exact path="/register" element={<Registration/>}/>
                             {/* <Route element={<PrivateRoute/>}>
                                 <Route path='/admin/dashboard' element={<Dashboard/>}/>
