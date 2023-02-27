@@ -11,6 +11,7 @@ import PassengerDetails from './passengerDetails';
 import Helper from './Helper';
 import AddTrain from './addTrain';
 import ManageTrain from './manageTrain';
+import ManageStation from './manageStation';
 import AddStation from './addStation';
 import AdminDashboard from './Admin_Dashboard';
 import axios from 'axios';
@@ -58,7 +59,7 @@ export default function Dashboard(){
                                 <Route path='/admin/dashboard' element={<Dashboard/>}/>
                             </Route> */}
                         <Route exact path="/forgotPassword" element={<ForgotPassword/>}/>
-                    
+                        <Route exact path="/manageStation" element={<ManageStation/>}/>
                         <Route exact path="/adminDashboard" element={<AdminDashboard isLoggedIn={isLoggedIn}/>}/>
                         <Route exact path="/passengerDetails" element={<PassengerDetails/>}/>
                         <Route exact path="/addTrain" element={<AddTrain/>}/>
