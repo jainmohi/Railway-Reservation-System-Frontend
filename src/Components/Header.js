@@ -73,10 +73,10 @@ function Header(props)
           <li className="nav-item mx-2">
             <Link to={"/about"}>About Us</Link>
           </li>
-          <li className="nav-item mx-2">
+          {/* <li className="nav-item mx-2">
             <Link to={"/passengerDetails"}>PassengerDetails</Link>
-          </li>
-          <li className="nav-item mx-2">
+          </li> */}
+          {/* <li className="nav-item mx-2">
             <Link to={"/addTrain"}>Add Train</Link>
           </li>
           <li className="nav-item mx-2">
@@ -84,7 +84,7 @@ function Header(props)
           </li>
           <li className="nav-item mx-2">
             <Link to={"/addStation"}>Add Station</Link>
-          </li>
+          </li> */}
           {/* <li className="nav-item mx-2">
             <Link to={"/login"}>Login</Link>
           </li>
