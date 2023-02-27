@@ -26,9 +26,9 @@ export default function Payment() {
                             onChange={form.handleChangeEvent}
                             value={fields.email} */}
                 </div>
-                <label className="error">
+                {/* <label className="error">
                 {errors.name ? errors.name : ""}
-                </label>
+                </label> */}
 
                 <div className="form-group mt-2">
                     <label for="email">Email:</label>
@@ -37,9 +37,9 @@ export default function Payment() {
                             onChange={form.handleChangeEvent}
                             value={fields.password} */}
                 </div>
-                <label className="error">
+                {/* <label className="error">
                 {errors.email ? errors.email : ""}
-                </label>
+                </label> */}
                 
                 <div className="form-group mt-2">
                     <label for="date">Date Of Birth:</label>
@@ -48,9 +48,9 @@ export default function Payment() {
                             onChange={form.handleChangeEvent}
                             value={fields.password} */}
                 </div>
-                <label className="error">
+                {/* <label className="error">
                 {errors.date ? errors.date : ""}
-                </label>
+                </label> */}
 
                 <div className="form-group mt-2">
                     <label for="credit">Credit Card:</label>
@@ -59,9 +59,9 @@ export default function Payment() {
                             onChange={form.handleChangeEvent}
                             value={fields.password} */}
                 </div>
-                <label className="error">
+                {/* <label className="error">
                 {errors.date ? errors.date : ""}
-                </label>
+                </label> */}
 
                 <div>
                 <center>

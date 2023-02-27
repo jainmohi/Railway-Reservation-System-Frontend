@@ -14,6 +14,7 @@ import ManageTrain from './manageTrain';
 import AddStation from './addStation';
 import AdminDashboard from './Admin_Dashboard';
 import axios from 'axios';
+import Payment from './Payment';
 
 export default function Dashboard(){
 
@@ -63,6 +64,7 @@ export default function Dashboard(){
                         <Route exact path="/addTrain" element={<AddTrain/>}/>
                         <Route exact path="/manageTrain" element={<ManageTrain/>}/>
                         <Route exact path="/addStation" element={<AddStation/>}/>
+                        <Route exact path="/payments" element={<Payment/>}/>
                     </Routes>
                     </div>
                     <Routes>
