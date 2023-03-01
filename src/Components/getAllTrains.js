@@ -41,8 +41,6 @@ export default function GetAllTrains(){
       .catch(error => console.error(error));
     }
 
-    
-    
     return (
         <table class="table">
         <thead>
