@@ -53,9 +53,9 @@ export default function AddTrain() {
     return ( 
       
 
-    <div>
+    <div className="row">
         
-
+      <div className="col-4">
        <ul class="nav nav-pills flex-column mb-auto">
       <li className="nav-item mx-2">
       <Link class="btn btn-primary" to={"/addTrain"}>Add Train</Link>
@@ -72,17 +72,18 @@ export default function AddTrain() {
       <li className="nav-item mx-2">
       <Link class="btn btn-primary" to={"/manageTrain"}>Manage Station</Link>
       </li>
-    </ul>
-    <div className="container">
+      </ul>
+      </div>
+    <div className="container col-10">
     <div className="row justify-content-center">
         <div className="col-sm-8 col-md-6 col-lg-4">
             <div className="card mt-5">
                 <div className="card-header text-center">
-                    <h4>Registration</h4>
+                    <h4>Add Train</h4>
                 </div>
                 <div className="card-body">
                     <form className="myForm"
-            noValidate
+            noValidate 
             autoComplete="off"
             onSubmit={onSubmit}>
                     <div className="row">
@@ -99,25 +100,27 @@ export default function AddTrain() {
                         </div>
                         <div className="form-group col">
                             <label htmlFor="lastname">start Time:</label>
-                            <input type="text" className="form-control" id="startTime" name="startTime" value={fields.startTime}
+                            <input type="time" className="form-control" id="startTime" name="startTime" value={fields.startTime}
                 onChange={form.handleChangeEvent}
                 onBlur={form.handleBlurEvent}
                 data-async/>
-                        </div>
-                        <label className="error">
+                <label className="error">
                 {errors.startTime ? errors.startTime : ""}
               </label> 
+                        </div>
+                        
                     </div>
                     <div className="form-group col">
                             <label htmlFor="lastname">end Time:</label>
-                            <input type="text" className="form-control" id="endTime" name="endTime" value={fields.endTime}
+                            <input type="time" className="form-control" id="endTime" name="endTime" value={fields.endTime}
                 onChange={form.handleChangeEvent}
                 onBlur={form.handleBlurEvent}
                 data-async/>
-                        </div>
-                        <label className="error">
+                <label className="error">
                 {errors.endTime ? errors.endTime : ""}
-              </label> 
+              </label>
+                        </div>
+                         
                     
                         
                         
@@ -134,8 +137,7 @@ export default function AddTrain() {
             </div>
         </div>
     </div>
-</div>
-        
+</div>    
       
     </div>
 

@@ -120,6 +120,7 @@ nav {
 	flex: 1;
 	background: #ccc;
 	padding: 20px;
+	height: 60px;
   }
   
   /* Style the list inside the menu */

@@ -47,9 +47,8 @@ function Header(props)
     }
     return (
     <>
-    {}
     <div>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
       <a className="navbar-brand" href="#">Railway Reservation System</a>
       <button
         className="navbar-toggler"
