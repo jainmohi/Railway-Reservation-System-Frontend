@@ -20,7 +20,8 @@ import GetAllTrains from './getAllTrains';
 import ProtectedRoute from './ProtectedRoute';
 import UpdateTrain from './updateTrain';
 import GetAllUsers from './getAllUsers';
-
+import SearchTrainForm from './Home/SearchTrainForm';
+import train from './../images/train.png';
 export default function Dashboard(){
 
 
@@ -50,8 +51,10 @@ export default function Dashboard(){
     return (
         <div>
             <Router>
-                 <div className="home_div mb-4">
+                 
                 <Header signOut={signOut} uName={uName} isLoggedIn={isLoggedIn}/> 
+                <div className="home_div mb-4" >
+                {/* <div style={{ backgroundImage:`url(${train})`,backgroundRepeat:"no-repeat" }}></div> */}
                     <Routes>
                     
                         <Route exact path="/" element={<Home/>}/>
@@ -73,6 +76,8 @@ export default function Dashboard(){
                         <Route exact path="/getAllTrains" element={<GetAllTrains/>}/>
                         <Route exact path="/updateTrain" element={<UpdateTrain/>}/>
                         <Route exact path="/getAllUsers" element={<GetAllUsers/>}/>
+                        <Route exact path="/SearchTrainForm" element={<SearchTrainForm/>}/>
+
 
 
                         {/* <ProtectedRoute exact path="/admin/getAllTrains" isLoggedIn={isLoggedIn} element={<GetAllTrains/>} /> */}
