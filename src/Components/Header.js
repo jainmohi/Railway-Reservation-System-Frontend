@@ -92,7 +92,6 @@ function Header(props)
           </li> */}
           {showButtons()}
         </ul>
-        
       </div>
     </nav>
     { }

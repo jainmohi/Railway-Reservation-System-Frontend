@@ -83,7 +83,7 @@ export default function Login(props) {
                 <div className="container">
     <div className="row justify-content-center">
         <div className="col-sm-8 col-md-6 col-lg-4">
-            <div className="card mt-5">
+            <div className="card mt-5 shadow w-100">
                 <div className="card-header text-center">
                     <h4>Login</h4>
                 </div>

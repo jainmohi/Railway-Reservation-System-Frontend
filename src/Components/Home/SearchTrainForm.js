@@ -1,19 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useFormInputValidation } from "react-form-input-validation";
 
 export default function SearchTrainForm(){
 
+    const navigate = useNavigate();
     const [fromStationName, setFromStationName] = useState("");
     const [toStationName, setToStationName] = useState("");
-    // const [date, setDate] = useState("");
-    // const [classType, setClassType] = useState("");
 
     var postData = () => {
-
-
-
+         navigate('/searchTrains');
     }
 
     return (

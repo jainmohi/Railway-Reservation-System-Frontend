@@ -17,6 +17,9 @@ import AdminDashboard from './Admin_Dashboard';
 import axios from 'axios';
 import Payment from './Payment';
 import GetAllTrains from './getAllTrains';
+import ProtectedRoute from './ProtectedRoute';
+import UpdateTrain from './updateTrain';
+import GetAllUsers from './getAllUsers';
 
 export default function Dashboard(){
 
@@ -47,7 +50,7 @@ export default function Dashboard(){
     return (
         <div>
             <Router>
-                {/* <div className="home_div"> */}
+                 <div className="home_div mb-4">
                 <Header signOut={signOut} uName={uName} isLoggedIn={isLoggedIn}/> 
                     <Routes>
                     
@@ -68,8 +71,13 @@ export default function Dashboard(){
                         <Route exact path="/addStation" element={<AddStation/>}/>
                         <Route exact path="/payments" element={<Payment/>}/>
                         <Route exact path="/getAllTrains" element={<GetAllTrains/>}/>
+                        <Route exact path="/updateTrain" element={<UpdateTrain/>}/>
+                        <Route exact path="/getAllUsers" element={<GetAllUsers/>}/>
+
+
+                        {/* <ProtectedRoute exact path="/admin/getAllTrains" isLoggedIn={isLoggedIn} element={<GetAllTrains/>} /> */}
                     </Routes>
-                    {/* </div> */}
+                     </div>
                     <Routes>
                         <Route exact path="/about" element={<About/>}/>
                     </Routes>

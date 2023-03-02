@@ -103,10 +103,13 @@ code {
 }  
 
 .home_div{
-	background-image: url("https://images4.alphacoders.com/150/thumbbig-150168.webp");
+	/* background-image: url("https://wallpapercave.com/wp/wp4740876.jpg"); */
 	background-size: contain;
+	margin-bottom:10px;
 }
-
+.background{
+	background-color: #eeecec;
+}
 .buttons
 {
     text-align: right;

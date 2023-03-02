@@ -1,44 +1,41 @@
-import React from 'react';
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-//import HandleStorage from "./HandleStorage";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useFormInputValidation } from "react-form-input-validation";
-import axios from 'axios';
-import Helper from './Helper';
-import "../index.css" ;
-import AdminNavButtons from './AdminNavButtons';
+import AdminNavButtons from "./AdminNavButtons";
+import axios from "axios";
 
+export default function UpdateTrain(){
 
-
-export default function AddTrain() {
-    var navigate = useNavigate();
+    const { state } = useLocation();
     const [fields, errors, form] = useFormInputValidation(
         {
-         
-            trainName: "",
-            startTime: "",
-            endTime: "",
-            startStation:"",
-            endStation:"",
-            distance:0
+            trainId : state.train_code,
+            trainName: state.trainName,
+            startTime: state.startTime,
+            endTime: state.endTime,
+            startStation:state.startStation,
+            endStation:state.endStation,
+            distance:state.distance,
         },
         {
-          
+            trainId: "required",
             trainName: "required",
             startTime: "required",
-          endTime: "required",
-          startStation:"required",
+            endTime: "required",
+            startStation:"required",
             endStation:"required",
             distance:"required"
           
         }
       );
+    
       const onSubmit = async (event) => {
         const isValid = await form.validate(event);
         if (isValid) {
           axios
-            .post("http://localhost:7070/FP/admin/addtrain", {
+            .post("http://localhost:7070/FP/admin/updatetrain", {
+                train_code:fields.trainId,
                 trainName: fields.trainName,
                 startTime: fields.startTime,
                 endTime: fields.endTime,
@@ -59,9 +56,8 @@ export default function AddTrain() {
         }
       };
 
-    return ( 
-      
-<>
+    return (
+        <>
     <AdminNavButtons/>
     <div className="container col-10">
     <div className="row justify-content-center">
@@ -75,9 +71,20 @@ export default function AddTrain() {
             noValidate 
             autoComplete="off"
             onSubmit={onSubmit}>
-                    <div className='row'>
-                      
+
+                    
+                    <div className="form-group col">
+                    <label htmlFor="trainId">Train Id:</label>
+                    <input type="text" className="form-control" id="trainId" name="trainId" readOnly={true} value={fields.trainId}
+                    onChange={form.handleChangeEvent}
+                    onBlur={form.handleBlurEvent}
+                    data-async
+                    />
+                            <label className="error">
+                            {errors.trainId ? errors.trainId : ""}
+                        </label>
                     </div>
+
                     <div className="form-group col">
                     <label htmlFor="firstName">Train Name:</label>
                     <input type="text" className="form-control" id="trainName" name="trainName" value={fields.trainName}
@@ -151,7 +158,7 @@ export default function AddTrain() {
               
                         <div>
                         <center>
-                            <button type="submit" className="btn btn-primary btn-block my-3">ADD</button>
+                            <button type="submit" className="btn btn-primary btn-block my-3">Update</button>
                         </center>
                         </div>
                     </form>
@@ -163,6 +170,7 @@ export default function AddTrain() {
 </div>    
       
     </>
+
 
     );
 }

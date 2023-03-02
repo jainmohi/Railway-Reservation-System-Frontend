@@ -1,13 +1,15 @@
 import axios from "axios";
 import React from "react";
 import { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import AdminNavButtons from "./AdminNavButtons";
 import Helper from './Helper';
 
 export default function GetAllTrains(){
 
   const { isLoggedIn } = Helper();
   const [trains, setTrains] = useState([]);
-
+  var navigate = useNavigate();
   useEffect(() => {
     axios.get('http://localhost:7070/FP/admin/trainsList')
       .then(response =>{
@@ -19,36 +21,47 @@ export default function GetAllTrains(){
   }, []);
 
     const deleteTrain = (idToDelete) => {
-      axios.delete("http://localhost:7070/FP/admin/deleteTrain/${idToDelete}").then(response => {
+      axios.delete(`http://localhost:7070/FP/admin/deletetrain/${idToDelete}`).then(response => {
         console.log(response.data);
         // Do something with the response, e.g. update state
         const newTrains = trains.filter(item => item.id !== idToDelete);
-        setTrains(newTrains);
-
+        setTrains([...newTrains]);
+        // setTrains(newTrains);
+        window.location.reload(true);
         window.alert("Train with code"+idToDelete+"deleted successfully");
       })
       .catch(error => console.error(error));
     }
     
     const updateTrain = (idToUpdate) => {
-      axios.get("http://localhost:7070/FP/admin/updateTrain/${idToUpdate}").then(response => {
+      axios.get(`http://localhost:7070/FP/admin/getTrain/${idToUpdate}`).then(response => {
         console.log(response.data);
+        navigate("/updateTrain",{state:response.data})
         // Do something with the response, e.g. update state
-        const newTrains = trains.filter(item => item.id !== idToUpdate);
-        setTrains(newTrains);
-        window.alert("Train with code"+idToUpdate+"deleted successfully");
+        // const newTrains = trains.filter(item => item.id !== idToUpdate);
+        // setTrains(newTrains);
+        // window.alert("Train with code"+idToUpdate+"deleted successfully");
       })
       .catch(error => console.error(error));
     }
 
     return (
-        <table class="table">
+      <>
+      <AdminNavButtons/>
+      <div className="container background ml-5">
+      <h2 className="text-center mt-4 mb-4 px-3 py-3">Trains List</h2>
+      </div>
+        {/* <h2 className="text-center mt-4 mb-4">Trains List</h2> */}
+        <table className="container text-center table table-hover shadow-lg ml-5">
         <thead>
           <tr>
             <th scope="col">Train_code</th>
             <th scope="col">Train Name</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Start Time</th>
+            <th scope="col">End Time</th>
+            <th scope="col">Start Station</th>
+            <th scope="col">End Station</th>
+            <th scope="col">distance</th>
             <th></th>
             <th></th>
           </tr>
@@ -60,7 +73,10 @@ export default function GetAllTrains(){
             {/* <td></td> */}
             <td>{item.trainName}</td>
             <td>{item.startTime}</td>
-            <td>{item.endTime}</td> 
+            <td>{item.endTime}</td>
+            <td>{item.startStation}</td> 
+            <td>{item.endStation}</td>
+            <td>{item.distance} kms</td>
             <td><button className="btn btn-success" onClick={()=>{updateTrain(item.train_code)}}>Edit</button></td>
             <td><button className="btn btn-danger" onClick={()=>{deleteTrain(item.train_code)}}>Delete</button></td>
           </tr>
@@ -78,6 +94,7 @@ export default function GetAllTrains(){
       <td>@twitter</td>
     </tr> */}
   </tbody>
-</table>
+  </table>
+  </>
     )
 }
