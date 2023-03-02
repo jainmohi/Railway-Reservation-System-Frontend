@@ -12,7 +12,7 @@ import Helper from './Helper';
 import AddTrain from './addTrain';
 import ManageTrain from './manageTrain';
 import ManageStation from './manageStation';
-import AddStation from './addStation';
+// import AddStation from './addStation';
 import AdminDashboard from './Admin_Dashboard';
 import axios from 'axios';
 import Payment from './Payment';
@@ -20,6 +20,7 @@ import GetAllTrains from './getAllTrains';
 import ProtectedRoute from './ProtectedRoute';
 import UpdateTrain from './updateTrain';
 import GetAllUsers from './getAllUsers';
+import TrainData from './TrainData';
 
 export default function Dashboard(){
 
@@ -68,11 +69,13 @@ export default function Dashboard(){
                         <Route exact path="/passengerDetails" element={<PassengerDetails/>}/>
                         <Route exact path="/addTrain" element={<AddTrain/>}/>
                         <Route exact path="/manageTrain" element={<ManageTrain/>}/>
-                        <Route exact path="/addStation" element={<AddStation/>}/>
+                        {/* <Route exact path="/addStation" element={<AddStation/>}/> */}
                         <Route exact path="/payments" element={<Payment/>}/>
                         <Route exact path="/getAllTrains" element={<GetAllTrains/>}/>
                         <Route exact path="/updateTrain" element={<UpdateTrain/>}/>
                         <Route exact path="/getAllUsers" element={<GetAllUsers/>}/>
+                        <Route exact path="/getAllTrains/trainData" element={<TrainData/>}/>
+
 
 
                         {/* <ProtectedRoute exact path="/admin/getAllTrains" isLoggedIn={isLoggedIn} element={<GetAllTrains/>} /> */}

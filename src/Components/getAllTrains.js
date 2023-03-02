@@ -77,7 +77,7 @@ export default function GetAllTrains(){
             <td>{item.startStation}</td> 
             <td>{item.endStation}</td>
             <td>{item.distance} kms</td>
-            <td><button className="btn btn-success" onClick={()=>{updateTrain(item.train_code)}}>Edit</button></td>
+            <td><button className="btn btn-success" onClick={()=>{updateTrain(item.train_code)}}>Update</button></td>
             <td><button className="btn btn-danger" onClick={()=>{deleteTrain(item.train_code)}}>Delete</button></td>
           </tr>
           ))}
