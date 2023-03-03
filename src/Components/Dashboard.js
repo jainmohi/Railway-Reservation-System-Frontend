@@ -7,9 +7,7 @@ import Registration from './Register';
 import About from './About';
 import Footer from './Footer';
 import ForgotPassword from './forgotPassword';
-import PassengersDetails from './passengerDetails';
 import Helper from './Helper';
-import PassengerDetails from './passengerDetails';
 import AddTrain from './addTrain';
 import ManageTrain from './manageTrain';
 // import ManageStation from './manageStation';
@@ -27,7 +25,6 @@ import MyComponent from './PassengersDetails';
 import TrainsList from './seeSearchedTrains';
 
 export default function Dashboard(){
-
 
     var { isLoggedIn,clearStorage,getSessionStorage,setSessionStorage} = Helper();
     // var navigate = useNavigate();
@@ -51,7 +48,6 @@ export default function Dashboard(){
         // navigate("/");
     }
 
-    
     return (
         <div>
             <Router>
