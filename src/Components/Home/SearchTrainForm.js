@@ -10,7 +10,7 @@ export default function SearchTrainForm(){
     const [toStationName, setToStationName] = useState("");
 
     var postData = () => {
-         navigate('/searchTrains');
+         
     }
 
     return (

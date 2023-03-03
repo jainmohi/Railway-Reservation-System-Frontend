@@ -10,6 +10,7 @@ export default function GetAllTrains(){
   const { isLoggedIn } = Helper();
   const [trains, setTrains] = useState([]);
   var navigate = useNavigate();
+  var classes = [];
   useEffect(() => {
     axios.get('http://localhost:7070/FP/admin/trainsList')
       .then(response =>{
@@ -37,6 +38,28 @@ export default function GetAllTrains(){
       axios.get(`http://localhost:7070/FP/admin/getTrain/${idToUpdate}`).then(response => {
         console.log(response.data);
         navigate("/updateTrain",{state:response.data})
+        // Do something with the response, e.g. update state
+        // const newTrains = trains.filter(item => item.id !== idToUpdate);
+        // setTrains(newTrains);
+        // window.alert("Train with code"+idToUpdate+"deleted successfully");
+      })
+      .catch(error => console.error(error));
+    }
+
+    const checkSeatAvailability = (idToCheckStatus) => {
+      axios.get(`http://localhost:7070/FP/admin/getTrain/${idToCheckStatus}`).then(response => {
+        console.log(response.data);
+        var trainId = response.data.train_code
+        var trainData = response.data
+        axios.get(`http://localhost:7070/FP/admin/getClassesByTrain/${trainId}`)
+                    .then((response) => {
+                    console.log(response.data)
+                     navigate("/getAllTrains/trainData",{state:{trainData:trainData,classState:response.data}})
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+        //  navigate("/getAllTrains/trainData",{state:{trainData:response.data,classState: classes}})
         // Do something with the response, e.g. update state
         // const newTrains = trains.filter(item => item.id !== idToUpdate);
         // setTrains(newTrains);
@@ -79,6 +102,8 @@ export default function GetAllTrains(){
             <td>{item.distance} kms</td>
             <td><button className="btn btn-success" onClick={()=>{updateTrain(item.train_code)}}>Update</button></td>
             <td><button className="btn btn-danger" onClick={()=>{deleteTrain(item.train_code)}}>Delete</button></td>
+            <td><button className="btn btn-danger" onClick={()=>{checkSeatAvailability(item.train_code)}}>Check Status</button></td>
+
           </tr>
           ))}
     {/* <tr>

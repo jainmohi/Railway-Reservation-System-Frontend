@@ -7,11 +7,12 @@ import Registration from './Register';
 import About from './About';
 import Footer from './Footer';
 import ForgotPassword from './forgotPassword';
-import PassengerDetails from './passengerDetails';
+import PassengersDetails from './passengerDetails';
 import Helper from './Helper';
+import PassengerDetails from './passengerDetails';
 import AddTrain from './addTrain';
 import ManageTrain from './manageTrain';
-import ManageStation from './manageStation';
+// import ManageStation from './manageStation';
 // import AddStation from './addStation';
 import AdminDashboard from './Admin_Dashboard';
 import axios from 'axios';
@@ -20,6 +21,9 @@ import GetAllTrains from './getAllTrains';
 import ProtectedRoute from './ProtectedRoute';
 import UpdateTrain from './updateTrain';
 import GetAllUsers from './getAllUsers';
+import SearchTrainForm from './Home/SearchTrainForm';
+import TrainData from './TrainData';
+import MyComponent from './PassengersDetails';
 
 export default function Dashboard(){
 
@@ -65,9 +69,9 @@ export default function Dashboard(){
                                 <Route path='/admin/dashboard' element={<Dashboard/>}/>
                             </Route> */}
                         <Route exact path="/forgotPassword" element={<ForgotPassword/>}/>
-                        <Route exact path="/manageStation" element={<ManageStation/>}/>
+                        {/* <Route exact path="/manageStation" element={<ManageStation/>}/> */}
                         <Route exact path="/adminDashboard" element={<AdminDashboard isLoggedIn={isLoggedIn}/>}/>
-                        <Route exact path="/passengerDetails" element={<PassengerDetails/>}/>
+                        {/* <Route exact path="/passengerDetails" element={<PassengerDetails/>}/> */}
                         <Route exact path="/addTrain" element={<AddTrain/>}/>
                         <Route exact path="/manageTrain" element={<ManageTrain/>}/>
                         {/* <Route exact path="/addStation" element={<AddStation/>}/> */}
@@ -75,7 +79,9 @@ export default function Dashboard(){
                         <Route exact path="/getAllTrains" element={<GetAllTrains/>}/>
                         <Route exact path="/updateTrain" element={<UpdateTrain/>}/>
                         <Route exact path="/getAllUsers" element={<GetAllUsers/>}/>
-
+                        <Route exact path="/searchTrains" element={<SearchTrainForm/>}/>
+                        <Route exact path="/getAllTrains/trainData" element={<TrainData/>}/>
+                        <Route exact path="/passengersDetails" element={<MyComponent/>}/>
 
                         {/* <ProtectedRoute exact path="/admin/getAllTrains" isLoggedIn={isLoggedIn} element={<GetAllTrains/>} /> */}
                     </Routes>

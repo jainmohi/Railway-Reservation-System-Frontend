@@ -67,7 +67,7 @@ function Header(props)
             <Link to={"/"}>Home</Link>
           </li>
           <li className="nav-item active mx-2 ">
-            <Link to={"/SearchTrainForm"}>SearchTrains</Link>
+            <Link to={"/searchTrains"}>SearchTrains</Link>
           </li>
           {/* <li className="nav-item mx-2">
             <Link to={"/admin"}>Admin</Link>

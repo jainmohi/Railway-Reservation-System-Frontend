@@ -64,7 +64,7 @@ export default function UpdateTrain(){
         <div className="col-sm-8 col-md-6 col-lg-4">
             <div className="card mt-5  shadow-lg">
                 <div className="card-header text-center">
-                    <h4>Add Train</h4>
+                    <h4>Update Train Data</h4>
                 </div>
                 <div className="card-body">
                     <form className="myForm"
@@ -140,8 +140,6 @@ export default function UpdateTrain(){
                 {errors.endStation ? errors.endStation : ""}
               </label> 
                         </div>
-
-
 
               <div className="form-group col">
               <label htmlFor="distance">distance</label>

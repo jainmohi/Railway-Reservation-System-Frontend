@@ -21,7 +21,7 @@ export default function AddTrain() {
             endTime: "",
             startStation:"",
             endStation:"",
-            distance:0
+            distance:""
         },
         {
           
@@ -30,7 +30,7 @@ export default function AddTrain() {
           endTime: "required",
           startStation:"required",
             endStation:"required",
-            distance:"required"
+            distance:"required|numeric"
           
         }
       );
@@ -51,7 +51,7 @@ export default function AddTrain() {
              
               console.log(response);  
               window.alert("train added successfully");
-              // navigate("/adminDashboard");
+              navigate("/adminDashboard");
             })
             .catch(function (error) {
               console.log(error);
@@ -138,7 +138,7 @@ export default function AddTrain() {
 
               <div className="form-group col">
               <label htmlFor="distance">distance</label>
-              <input type="number" className="form-control" id="distance" name="distance" value={fields.distance}
+              <input type="text" className="form-control" id="distance" name="distance" value={fields.distance}
                 onChange={form.handleChangeEvent}
                 onBlur={form.handleBlurEvent}
                 data-async/>
