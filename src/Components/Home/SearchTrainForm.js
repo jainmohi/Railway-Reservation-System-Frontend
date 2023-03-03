@@ -2,16 +2,51 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useFormInputValidation } from "react-form-input-validation";
+import axios from "axios";
+import Helper from "../Helper";
 
 export default function SearchTrainForm(){
 
     const navigate = useNavigate();
-    const [fromStationName, setFromStationName] = useState("");
-    const [toStationName, setToStationName] = useState("");
-
-    var postData = () => {
-         
-    }
+    const {isLoggedIn,getSessionStorage} = Helper();  
+    const [fields, errors, form] = useFormInputValidation(
+        {
+            fromStationName: "",
+            toStationName: "",
+        },
+        {
+            fromStationName: "required",
+            toStationName: "required"
+        }
+      );
+    
+      var postData = async (event)=>{
+        //debugger;
+       //var navigate = useNavigate();
+      const isValid = await form.validate(event);
+      if(isLoggedIn()){
+        
+        if (isValid) {
+            axios.post("http://localhost:7070/FP/users/getTrainsByStations", {
+              fromStation: fields.fromStationName,
+              toStation: fields.toStationName
+              })
+              .then(function (response) {
+                console.log(response);
+                navigate("/trainsList",{state:response.data})
+              })
+              .catch(function (error) {
+                console.log(error);
+              });   
+        };
+        }
+        else{
+            window.alert("You need to login to search trains")
+            navigate("/login")
+          }
+        
+      }
+      
 
     return (
         <div>
@@ -22,10 +57,19 @@ export default function SearchTrainForm(){
         </div>
         
         <div className="form-group">
-        <input type="text" className="form-control" name="fromStationName" value={fromStationName} onChange={(e) => setFromStationName(e.target.value)} placeholder="From Station" required="required"/>
+        <input type="text" className="form-control" name="fromStationName" 
+                                    onBlur={form.handleBlurEvent}
+                                    onChange={form.handleChangeEvent}
+                                    value={fields.fromStationName} placeholder="From Station" required="required"/>
+                            <label className="error">
+                                {errors.fromStationName? errors.fromStationName: ""}
+                            </label>
         </div>
         <div className="form-group">
-        <input type="text" className="form-control" name="toStationName" value={toStationName} onChange={(e) => setToStationName(e.target.value)} placeholder="To Station" required="required"/>
+        <input type="text" className="form-control" name="toStationName"
+                                    onBlur={form.handleBlurEvent}
+                                    onChange={form.handleChangeEvent}
+                                    value={fields.toStationName} placeholder="To Station" required="required"/>
         </div>
         <div className="form-group">
 			<div className="row">

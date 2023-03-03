@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 function MyComponent() {
   const [dataArray, setDataArray] = useState([]);
   const [formData, setFormData] = useState({});
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     setDataArray([...dataArray, formData]);

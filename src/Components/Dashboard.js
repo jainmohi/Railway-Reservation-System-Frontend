@@ -24,6 +24,7 @@ import GetAllUsers from './getAllUsers';
 import SearchTrainForm from './Home/SearchTrainForm';
 import TrainData from './TrainData';
 import MyComponent from './PassengersDetails';
+import TrainsList from './seeSearchedTrains';
 
 export default function Dashboard(){
 
@@ -82,7 +83,7 @@ export default function Dashboard(){
                         <Route exact path="/searchTrains" element={<SearchTrainForm/>}/>
                         <Route exact path="/getAllTrains/trainData" element={<TrainData/>}/>
                         <Route exact path="/passengersDetails" element={<MyComponent/>}/>
-
+                        <Route exact path="/trainsList" element={<TrainsList/>}/>
                         {/* <ProtectedRoute exact path="/admin/getAllTrains" isLoggedIn={isLoggedIn} element={<GetAllTrains/>} /> */}
                     </Routes>
                      </div>

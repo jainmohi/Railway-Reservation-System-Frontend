@@ -10,22 +10,6 @@ export default function TrainData(){
   var classes = state.classState;
   console.log(state);
   
-  // const getClassData = (id) =>
-  //       {   
-  //         console.log(id);
-  //           axios.get(`http://localhost:7070/FP/admin/getClassesByTrain/${id}`)
-  //                   .then((response) => {
-                    
-  //                    classes = [...response.data]
-  //                   })
-  //                   .catch((error) => {
-  //                       console.log(error);
-  //                   });
-  //       }
-
-  // useEffect(()=>{getClassData(id)},[]);
-  // useEffect(()=>{getClassData(id)},[classes])
-
     return(
         <>
             <div className="jumbotron">
@@ -45,7 +29,7 @@ export default function TrainData(){
                                     <mohit className="mb-3">Start Station: <strong>{state.trainData.startStation}</strong></mohit>&nbsp;&nbsp;&nbsp;
                                     <mohit className="mb-3">End time: <strong>{state.trainData.endStation}</strong></mohit><br/>
                                     
-                    </p>
+                    </p> 
                                     <hr/>
                                     <strong>Seat Availability</strong><br/>
                                     <div className="d-flex justify-content-start align-items-center">

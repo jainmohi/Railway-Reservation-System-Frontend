@@ -99,9 +99,9 @@ export default function ForgotPassword() {
     //   return () => clearInterval(timer);
     // }, [counter]);
 
-    return (
-            <div>
-                <div className="container">
+return (
+<div>
+  <div className="container">
     <div className="row justify-content-center">
         <div className="col-sm-8 col-md-6 col-lg-4">
             <div className="card mt-5">
@@ -158,7 +158,7 @@ export default function ForgotPassword() {
             </div>
         </div>
     </div>
+  </div>
 </div>
-            </div>
     );
 }

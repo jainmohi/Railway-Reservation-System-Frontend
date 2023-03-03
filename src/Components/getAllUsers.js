@@ -59,7 +59,7 @@ export default function GetAllUsers(){
             <td>{item.firstName}</td>
             <td>{item.lastName}</td>
             <td>{item.email}</td>
-            <td>{item.phone}</td> 
+            <td>{item.phone}</td>
             {/* <td><button className="btn btn-success" onClick={()=>{updateTrain(item.train_code)}}>Edit</button></td> */}
             <td><button className="btn btn-danger" onClick={()=>deleteTrain(item.user_id)}>Delete</button></td>
           </tr>
