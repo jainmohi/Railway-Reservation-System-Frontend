@@ -37,7 +37,7 @@ export default function SearchTrainForm(){
               })
               .catch(function (error) {
                 console.log(error);
-              });   
+              });  
         };
         }
         else{
