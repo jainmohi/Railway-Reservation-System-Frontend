@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 
 export default function TrainData(){
 
+  const [noOfSeats,setnoOfSeats] = useState("");
   const {state} = useLocation();
   // const [classes,setClasses] = useState([]);
   var id = state.trainData.train_code;
@@ -27,8 +28,8 @@ export default function TrainData(){
                                     <mohit className="mb-3">Start time: <strong>{state.trainData.startTime}</strong></mohit>&nbsp;&nbsp;&nbsp;
                                     <mohit className="mb-3">End time: <strong>{state.trainData.endTime}</strong></mohit>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; || &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <mohit className="mb-3">Start Station: <strong>{state.trainData.startStation}</strong></mohit>&nbsp;&nbsp;&nbsp;
-                                    <mohit className="mb-3">End time: <strong>{state.trainData.endStation}</strong></mohit><br/>
-                                    
+                                    <mohit className="mb-3">End Station: <strong>{state.trainData.endStation}</strong></mohit><br/>
+         
                     </p> 
                                     <hr/>
                                     <strong>Seat Availability</strong><br/>

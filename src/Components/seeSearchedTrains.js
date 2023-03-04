@@ -4,67 +4,54 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 export default function TrainsList(){
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const {state} = useLocation();
   // const [classes,setClasses] = useState([]);
-  var id = state.trainData.train_code;
-  var classes = state.classState;
+  // var id = state.trainData.train_code;
+  // var classes = state.classState;
   console.log(state)
+  var trainsList = [...state];
 
-//   const checkSeatAvailability = (idToCheckStatus) => {
-//     axios.get(`http://localhost:7070/FP/admin/getTrain/${idToCheckStatus}`).then(response => {
-//       console.log(response.data);
-//       var trainId = response.data.train_code
-//       var trainData = response.data
-//       axios.get(`http://localhost:7070/FP/admin/getClassesByTrain/${trainId}`)
-//                   .then((response) => {
-//                   console.log(response.data)
-//                    navigate("/trainsList",{state:{trainData:trainData,classState:response.data}})
-//                   })
-//                   .catch((error) => {
-//                       console.log(error);
-//                   });
-//       //  navigate("/getAllTrains/trainData",{state:{trainData:response.data,classState: classes}})
-//       // Do something with the response, e.g. update state
-//       // const newTrains = trains.filter(item => item.id !== idToUpdate);
-//       // setTrains(newTrains);
-//       // window.alert("Train with code"+idToUpdate+"deleted successfully");
-//     })
-//     .catch(error => console.error(error));
-//   }
+    if(state)
     return(
         <>
             <div className="jumbotron">
-        <h1 className="display-4"><center>Patients List</center></h1>
+        <h1 className="display-4"><center>Trains List</center></h1>
         <hr className="my-4" />
         <h1></h1></div>
-                    {/* {classState.map((item)=>{ */}
+                     {trainsList.map((item)=>{ 
                          return(
                             <div className="container" /*key={item.userId.id}*/>
                             <div className="row d-flex justify-content-center align-items-center ">
                               <div className="col col-xl-10">
-                                <div className="card mb-5" style={{ borderRadius: "15px" }}>
+                                <div className="card mb-5" style={{ borderRadius: "10px" }}>
                                   <div className="card-body p-4">
-                                  <p className="small mb-0 text-bg-light p-3 "style={{ borderRadius: "10px" }}>
-                                    <h3 className="mb-3">Name : </h3>
-                    </p>
+                                  <p className="small mb-0 text-bg-light p-3 "style={{ borderRadius: "0px" }}>
+                                    <h3 className="mb-3">Name : {item.train.trainName}</h3>
+                                    <mohit className="mb-3">Start time: <strong>{item.train.startTime}</strong></mohit>&nbsp;&nbsp;&nbsp;
+                                    <mohit className="mb-3">End time: <strong>{item.train.endTime}</strong></mohit>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; || &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <mohit className="mb-3">Start Station: <strong>{item.train.startStation}</strong></mohit>&nbsp;&nbsp;&nbsp;
+                                    <mohit className="mb-3">End time: <strong>{item.train.endStation}</strong></mohit><br/>
+                    </p>          
                                     <hr/>
+                                    <strong>Seat Availability</strong>
                                     <div className="d-flex justify-content-start align-items-center">
                                       <p className="mb-0 text-uppercase">
                                         <i className="fas fa-cog me-2" />{" "}
-                                        <span className="text-muted small">Gender :</span>&nbsp;
-                                        <strong></strong>
+                                        <div className="text-muted small">{item.trainclasslist[0].classType}</div>&nbsp;
+                                        <strong>{item.trainclasslist[0].seatAvailable}</strong>
                                       </p>
                                       <span className="mx-2">|</span>
                                       <p className="mb-0 text-uppercase">
                                         <i className="fas fa-cog me-2" />{" "}
-                                        <span className="text-muted small">Age : </span>&nbsp;
-                                        <strong></strong>
+                                        <div className="text-muted small">{item.trainclasslist[1].classType}</div>&nbsp;
+                                        <strong>{item.trainclasslist[1].seatAvailable}</strong>
                                       </p>
                                       <span className="mx-2">|</span>
-                                      <p className="small mb-0">
-                                        <i className="far fa-star fa-lg" /> Location :&nbsp;
-                                        <strong></strong>
+                                      <p className="mb-0 text-uppercase">
+                                        <i className="far fa-cog me-2" />{" "}
+                                        <div className="text-muted small">{item.trainclasslist[2].classType}</div>&nbsp;
+                                        <strong>{item.trainclasslist[2].seatAvailable}</strong>
                                       </p>
                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -76,21 +63,12 @@ export default function TrainsList(){
                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                      <div className="form-group" style={{ textAlign: "right" }}><button type="button"  onClick={()=>{
-                                                            //     axios
-                                                            // .get(`http://localhost:8080/admin/deletePatient/${item.id}`)
-                                                            // .then((response) => {
-                                                            //     console.log(response.data);
-                                                                
-                                                            //     alert(`${item.userId.fullName} was deleted`);
-                                                            //     document.location.reload();
-                                                            // })
-                                                            // .catch((error) => {
-                                                            //     console.log(error);
-                                                            // });
-                                                            }} className="btn btn-danger">
-                                        Delete
-                                      </button></div>
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <div className="form-group" style={{ textAlign: "right" }}><button type="button"  onClick={()=>{navigate("/passengersDetails");}} className="btn btn-success btn-block">Book Tickets</button></div>
                                     </div>
                                   </div>
                                 </div>
@@ -98,7 +76,7 @@ export default function TrainsList(){
                             </div>
                           </div>  
                                 )
-                    {/* })}         */}
+                   })}         
         </>
     );
 }

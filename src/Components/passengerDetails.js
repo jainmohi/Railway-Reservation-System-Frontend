@@ -8,7 +8,6 @@ import { useFormInputValidation } from "react-form-input-validation";
 //import Helper from './Helper';
 export default function PassengerDetails() {
 
-
     const [fields, errors, form] = useFormInputValidation(
         {
           name: "",

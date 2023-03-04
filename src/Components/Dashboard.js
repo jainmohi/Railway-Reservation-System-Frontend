@@ -23,7 +23,7 @@ import SearchTrainForm from './Home/SearchTrainForm';
 import TrainData from './TrainData';
 import MyComponent from './PassengersDetails';
 import TrainsList from './seeSearchedTrains';
-
+import PassengerDetails from './passengerDetails';
 export default function Dashboard(){
 
     var { isLoggedIn,clearStorage,getSessionStorage,setSessionStorage} = Helper();
@@ -68,7 +68,7 @@ export default function Dashboard(){
                         <Route exact path="/forgotPassword" element={<ForgotPassword/>}/>
                         {/* <Route exact path="/manageStation" element={<ManageStation/>}/> */}
                         <Route exact path="/adminDashboard" element={<AdminDashboard isLoggedIn={isLoggedIn}/>}/>
-                        {/* <Route exact path="/passengerDetails" element={<PassengerDetails/>}/> */}
+                        <Route exact path="/passengerDetails" element={<PassengerDetails/>}/>
                         <Route exact path="/addTrain" element={<AddTrain/>}/>
                         <Route exact path="/manageTrain" element={<ManageTrain/>}/>
                         {/* <Route exact path="/addStation" element={<AddStation/>}/> */}
