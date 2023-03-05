@@ -4,24 +4,64 @@ import { useState } from "react";
 //import HandleStorage from "./HandleStorage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useFormInputValidation } from "react-form-input-validation";
-//import axios from 'axios';
-//import Helper from './Helper';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import Helper from './Helper';
 export default function Payment() {
 
+    const [paymentType,setPaymentType] = useState("");
+    const { state } = useLocation();
+    console.log(state);
+    const {getSessionStorage} = Helper();
+    const user = JSON.parse(getSessionStorage("user"));
 
+    function handleChange(event) {
+        const selectedValue = event.target.value;
+        console.log(`Selected value: ${selectedValue}`);
+        setPaymentType(selectedValue);
+        console.log(paymentType);
+        
+      }
+
+      const submitPayment = () =>{
+        alert("Payment initiated");
+        const data = {
+                trainId:state.trainId,
+                userId:user.user_id,
+                classType:state.classType,
+                temparoryPassengerdetails:state.passengerList,
+                paymentMethod:paymentType
+                }
+
+                console.log(data);
+
+                axios
+                .post("http://localhost:7070/FP/users/bookticket",data)
+                .then(function (response) {
+                  //.push("/login")
+                  console.log(response);  
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });   
+      }
     return ( <div>
         <div className="container">
         <div className="row justify-content-center">
         <div className="col-sm-8 col-md-6 col-lg-4">
-        <div className="card mt-5">
-        <div className="card-header text-center">
-            <h4>Passenger Details</h4>
+        <div className="card mt-5 shadow">
+        <div className="card-header text-center shadow">
+            <h4>Payments</h4>
         </div>
         <div className="card-body">
             <form>
+                <div className="mb-3">
+                <u>Amount Payable:</u>&nbsp;&nbsp;<span><strong>{state.fareAmount} rs.</strong></span>
+                </div>
                 <div className="form-group">
-                    <label for="name">Name:</label> 
-                    <input type="text" className="form-control" id="name" name="name" />
+                    <label for="name">Name:</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{user.firstName+" "+user.lastName}</b>
+        
                             {/* onBlur={form.handleBlurEvent}
                             onChange={form.handleChangeEvent}
                             value={fields.email} */}
@@ -31,8 +71,14 @@ export default function Payment() {
                 </label> */}
 
                 <div className="form-group mt-2">
-                    <label for="email">Email:</label>
-                    <input type="email" className="form-control" id="email" name="email" />
+                    <label for="email">Payment Type:</label>
+                    <select className="rounded border-1 mx-2" id="paymentType" name="paymentType" value={paymentType} onChange={handleChange} >
+                         {/* <option value="">Select an option</option>  */}
+                        <option value="Net Banking">Net Banking</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Debit Card">Debit Card</option>
+                        <option value="Upi">UPI</option>
+                    </select>
                             {/* onBlur={form.handleBlurEvent}
                             onChange={form.handleChangeEvent}
                             value={fields.password} */}
@@ -40,32 +86,18 @@ export default function Payment() {
                 {/* <label className="error">
                 {errors.email ? errors.email : ""}
                 </label> */}
-                
-                <div className="form-group mt-2">
-                    <label for="date">Date Of Birth:</label>
-                    <input type="date" className="form-control" id="date" name="date" />
-                            {/* onBlur={form.handleBlurEvent}
-                            onChange={form.handleChangeEvent}
-                            value={fields.password} */}
-                </div>
+            
                 {/* <label className="error">
                 {errors.date ? errors.date : ""}
                 </label> */}
 
-                <div className="form-group mt-2">
-                    <label for="credit">Credit Card:</label>
-                    <input type="number" className="form-control" id="credit" name="credit" />
-                            {/* onBlur={form.handleBlurEvent}
-                            onChange={form.handleChangeEvent}
-                            value={fields.password} */}
-                </div>
                 {/* <label className="error">
                 {errors.date ? errors.date : ""}
                 </label> */}
 
                 <div>
                 <center>
-                    <button type="submit" className="btn btn-primary btn-block my-3">ADD</button>
+                    <button type="button" className="btn btn-primary btn-block my-3" onClick={submitPayment}>Payment Gateway</button>
                 </center>
                 </div>
             </form>

@@ -7,7 +7,7 @@ import Helper from './Helper';
 
 export default function GetAllTrains(){
 
-  const { isLoggedIn } = Helper();
+  const { isLoggedIn,getSessionStorage } = Helper();
   const [trains, setTrains] = useState([]);
   var navigate = useNavigate();
   var classes = [];
@@ -68,6 +68,8 @@ export default function GetAllTrains(){
       .catch(error => console.error(error));
     }
 
+
+    if(isLoggedIn() && getSessionStorage("isAdmin")==true)
     return (
       <>
       <AdminNavButtons/>
@@ -122,4 +124,7 @@ export default function GetAllTrains(){
   </table>
   </>
     )
+    else{
+      navigate("/");
+    }
 }

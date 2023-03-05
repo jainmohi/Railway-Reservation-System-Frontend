@@ -64,8 +64,8 @@ var navigate = useNavigate();
     <div className="container">
     <div className="row justify-content-center">
         <div className="col-sm-8 col-md-6 col-lg-4">
-            <div className="card mt-5">
-                <div className="card-header text-center">
+            <div className="card mt-5 shadow">
+                <div className="card-header text-center shadow">
                     <h4>Registration</h4>
                 </div>
                 <div className="card-body">

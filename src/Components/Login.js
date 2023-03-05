@@ -9,7 +9,7 @@ import Helper from './Helper';
 export default function Login(props) {
 
      var navigate =  useNavigate();
-     var {getSessionStorage,setSessionStorage} = Helper();
+     var {getSessionStorage,setSessionStorage,isLoggedIn} = Helper();
     const [fields, errors, form] = useFormInputValidation(
         {
           email: "",
@@ -20,15 +20,6 @@ export default function Login(props) {
           password: "required"
         }
       );
-
-    // var loginFunc = async (e) =>{
-    //   //debugger;
-      
-    //   props.signIn(fields,isValid);
-    //   debugger;
-      
-    //   //window.location.reload(true)
-    // }
 
     var signIn = async (event)=>{
         //debugger;
@@ -42,12 +33,14 @@ export default function Login(props) {
             })
             .then(function (response) {
               //.push("/login")
-              debugger;
-              console.log(response);
+              console.log(response.data);
               if(fields.email==response.data.email && fields.password==response.data.password)
                { 
+                  const user = response.data;
+                  console.log(user)
                   setSessionStorage("userName", response.data.firstName);
-                  setSessionStorage("user", response.data);
+                  setSessionStorage("user", JSON.stringify(user));
+                  getSessionStorage("user");
                   setSessionStorage("isLoggedIn",true);
                   setSessionStorage("token", "1234");
                   props.UpdateHeader(response.data.firstName);
@@ -59,7 +52,7 @@ export default function Login(props) {
                   }
                   else{
                     setSessionStorage("isAdmin",false);
-                    navigate("/");
+                    navigate("/searchTrains");
                   }
                       
                   //window.alert("Logged in as "+response.data.firstName);
@@ -78,8 +71,11 @@ export default function Login(props) {
         
       };
       }
-
-    return ( <div>
+      
+      if(!isLoggedIn())
+    return ( 
+      
+      <div>
                 <div className="container">
     <div className="row justify-content-center">
         <div className="col-sm-8 col-md-6 col-lg-4">
@@ -136,6 +132,9 @@ export default function Login(props) {
     </div>
 </div>
             </div>
-            );
+            )
+
+            else
+                navigate("/");
 
         }

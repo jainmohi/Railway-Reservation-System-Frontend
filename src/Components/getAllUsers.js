@@ -7,7 +7,7 @@ import Helper from './Helper';
 
 export default function GetAllUsers(){
 
-  const { isLoggedIn } = Helper();
+  const { isLoggedIn,getSessionStorage } = Helper();
   const [users, setUsers] = useState([]);
   var navigate = useNavigate();
   useEffect(() => {
@@ -33,6 +33,7 @@ export default function GetAllUsers(){
     //   .catch(error => console.error(error));
     }
 
+    if(isLoggedIn && getSessionStorage("isAdmin") == true)
     return (
       <>
       <AdminNavButtons/>
@@ -80,4 +81,6 @@ export default function GetAllUsers(){
   </table>
   </>
     )
+    else
+      navigate("/");
 }
