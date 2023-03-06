@@ -20,7 +20,7 @@ export default function GetAllTrains(){
          )
       .catch(error => console.error(error));
   }, []);
-
+  console.log(getSessionStorage("isAdmin"));
     const deleteTrain = (idToDelete) => {
       axios.delete(`http://localhost:7070/FP/admin/deletetrain/${idToDelete}`).then(response => {
         console.log(response.data);
@@ -69,7 +69,7 @@ export default function GetAllTrains(){
     }
 
 
-    if(isLoggedIn() && getSessionStorage("isAdmin")==true)
+    if(isLoggedIn() && getSessionStorage("isAdmin")=="true")
     return (
       <>
       <AdminNavButtons/>
@@ -104,7 +104,7 @@ export default function GetAllTrains(){
             <td>{item.distance} kms</td>
             <td><button className="btn btn-success" onClick={()=>{updateTrain(item.train_code)}}>Update</button></td>
             <td><button className="btn btn-danger" onClick={()=>{deleteTrain(item.train_code)}}>Delete</button></td>
-            <td><button className="btn btn-danger" onClick={()=>{checkSeatAvailability(item.train_code)}}>Check Status</button></td>
+            <td><button className="btn btn-warning" onClick={()=>{checkSeatAvailability(item.train_code)}}>Check Status</button></td>
 
           </tr>
           ))}

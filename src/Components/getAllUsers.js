@@ -33,7 +33,7 @@ export default function GetAllUsers(){
     //   .catch(error => console.error(error));
     }
 
-    if(isLoggedIn && getSessionStorage("isAdmin") == true)
+    if(isLoggedIn && getSessionStorage("isAdmin") == "true")
     return (
       <>
       <AdminNavButtons/>
