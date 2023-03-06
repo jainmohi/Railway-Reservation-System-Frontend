@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormInputValidation } from "react-form-input-validation";
 import { useHistory, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 //import HandleStorage from "./HandleStorage";
 function Registration()
@@ -13,6 +14,7 @@ function Registration()
     //   const [contactNumber, setContactNumber] = useState("");
 var history//();
 var navigate = useNavigate();
+  const [error,setError] = useState("");
   const [fields, errors, form] = useFormInputValidation(
     {
       firstName: "",
@@ -52,7 +54,11 @@ var navigate = useNavigate();
           })
           .catch(function (error) {
             console.log(error);
-          });   
+            setError("Email already registered for user.");
+            setTimeout(function(){
+              window.location.reload();
+           }, 2000);
+          });
       }
     };
 
@@ -63,6 +69,9 @@ var navigate = useNavigate();
     <>
     <div className="container">
     <div className="row justify-content-center">
+    {error && <div class="alert alert-danger text-center" role="alert">
+    {error}
+    </div>}
         <div className="col-sm-8 col-md-6 col-lg-4">
             <div className="card mt-5 shadow">
                 <div className="card-header text-center shadow">

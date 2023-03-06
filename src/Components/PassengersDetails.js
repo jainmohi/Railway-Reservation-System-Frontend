@@ -18,6 +18,9 @@ function PassengerDetailsForm() {
       setPassengers([...passengers, { passengerName: "", gender: "", age: "" }]);
   };
 
+  const handleDeletePassenger = () =>{
+    
+  }
   const handlePassengerChange = (event, index) => {
     event.preventDefault();
     const { name, value } = event.target;
