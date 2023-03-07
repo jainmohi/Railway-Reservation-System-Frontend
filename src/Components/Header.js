@@ -29,7 +29,7 @@ function Header(props)
         if(props.isLoggedIn()){
            return <>
            
-                    <li className="nav-item mx-2 text-primary"><Link to="/" onClick={props.signOut}><button class="btn btn-primary">Log out</button></Link></li>
+                    <li className="nav-item mx-2 text-primary"><Link to="/" onClick={props.signOut}>Log out</Link></li>
                     <li className="nav-item mx-2 text-primary" >Welcome {props.uName}</li>
                   </>
         }

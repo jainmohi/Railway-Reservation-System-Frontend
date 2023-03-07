@@ -14,13 +14,17 @@ function PassengerDetailsForm() {
   const navigate = useNavigate();
 
   const handleAddPassenger = () => {
-    if(passengers.length<3)
+    if(passengers.length<5)
       setPassengers([...passengers, { passengerName: "", gender: "", age: "" }]);
+    else
+      setError("You can add upto 5 passengers only")
   };
 
   const handleDeletePassenger = () =>{
-    
+    setPassengers([{ passengerName: "", gender: "", age: "" }]);
+    setError("");
   }
+
   const handlePassengerChange = (event, index) => {
     event.preventDefault();
     const { name, value } = event.target;
@@ -30,6 +34,7 @@ function PassengerDetailsForm() {
   };
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     const data = {noOfPassenger:passengers.length,trainId:state.trainId,classType:state.classType};
 
     axios.post("http://localhost:7070/FP/users/bookingamount",data)
@@ -48,19 +53,21 @@ function PassengerDetailsForm() {
 
   return (
     <>
-    <form className="mx-5">
+    <h3 className="text-center">Passengers Details</h3>
+    <form className="mx-5" onSubmit={handleSubmit}>
     {passengers.map((passenger, index) => (
       <div key={index} className="container-fluid mb-3">
+        
         <h4>Passenger {index + 1}</h4>
         <div>
-      <div class="row border-0 rounded shadow-sm">
+      <div class="row border border-1 border-light rounded shadow-sm">
       <div class="form-group col-md-4">
         <label Htmlfor={`passengerName-${index}`}>Full Name</label>
-        <input type="text" class="form-control" id="passengerName" name="passengerName" placeholder="Enter full name" value={passenger.passengerName} onChange={(event) => handlePassengerChange(event, index)} required/>
+        <input type="text" class="form-control" id="passengerName" name="passengerName" placeholder="Enter full name" value={passenger.passengerName} onChange={(event) => handlePassengerChange(event, index)} required="required"/>
       </div>
       <div class="form-group col-md-4">
         <label htmlFor={`dob-${index}`}>Age</label>
-        <input type="number" class="form-control" id="age" name="age" placeholder="Enter age" min="6" value={passenger.age} onChange={(event) => handlePassengerChange(event, index)} required/>
+        <input type="number" class="form-control" id="age" name="age" placeholder="Enter age" min="6" value={passenger.age} onChange={(event) => handlePassengerChange(event, index)} required="required"/>
       </div>
     <div class="row">
     <div class="form-group col-md-4">
@@ -89,10 +96,15 @@ function PassengerDetailsForm() {
     </div>
   </div>
   ))}
+  <strong className="text-danger">{error}</strong><br/>
   <button type="button" className="btn btn-primary my-2" onClick={()=>{handleAddPassenger()}}>
         Add Passenger
+      </button>
+      <button type="button" className="btn btn-primary mx-3 my-2" onClick={()=>{handleDeletePassenger()}}>
+        Reset
       </button><br/>
-  <button type="button" class="btn btn-primary" onClick={(e)=>{handleSubmit(e)}}>Submit</button>
+      <br/>
+  <button type="submit" class="btn btn-primary">Submit</button>
   </form>
     </>
   );

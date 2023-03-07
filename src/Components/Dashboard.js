@@ -24,6 +24,7 @@ import TrainData from './TrainData';
 import MyComponent from './PassengersDetails';
 import TrainsList from './seeSearchedTrains';
 import PassengerDetails from './passengerDetails';
+import Ticket from './Ticket';
 export default function Dashboard(){
 
     var { isLoggedIn,clearStorage,getSessionStorage,setSessionStorage} = Helper();
@@ -50,8 +51,7 @@ export default function Dashboard(){
 
     return (
         <div>
-            <Router>
-                 
+            <Router>     
                 <Header signOut={signOut} uName={uName} isLoggedIn={isLoggedIn}/> 
                 <div className="home_div mb-4" >
                 {/* <div style={{ backgroundImage:`url(${train})`,backgroundRepeat:"no-repeat" }}></div> */}
@@ -80,6 +80,7 @@ export default function Dashboard(){
                         <Route exact path="/getAllTrains/trainData" element={<TrainData/>}/>
                         <Route exact path="/passengersDetails" element={<MyComponent/>}/>
                         <Route exact path="/trainsList" element={<TrainsList/>}/>
+                        <Route exact path="/ticket" element={<Ticket/>}/>
                         {/* <ProtectedRoute exact path="/admin/getAllTrains" isLoggedIn={isLoggedIn} element={<GetAllTrains/>} /> */}
                     </Routes>
                      </div>

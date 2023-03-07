@@ -4,7 +4,7 @@ import { useState } from "react";
 //import HandleStorage from "./HandleStorage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useFormInputValidation } from "react-form-input-validation";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Helper from './Helper';
 export default function Payment() {
@@ -12,8 +12,9 @@ export default function Payment() {
     const [paymentType,setPaymentType] = useState("");
     const { state } = useLocation();
     console.log(state);
-    const {getSessionStorage} = Helper();
+    const {getSessionStorage,setSessionStorage} = Helper();
     const user = JSON.parse(getSessionStorage("user"));
+    const navigate = useNavigate();
 
     function handleChange(event) {
         const selectedValue = event.target.value;
@@ -39,7 +40,10 @@ export default function Payment() {
                 .post("http://localhost:7070/FP/users/bookticket",data)
                 .then(function (response) {
                   //.push("/login")
-                  console.log(response);  
+                  console.log(response);
+                  setSessionStorage("ticketDetails",JSON.stringify(response.data));  
+                  setSessionStorage("isTicketGenerated",true);
+                  navigate("/ticket",{state:{noOfPassengers:state.passengerList.length}});
                 })
                 .catch(function (error) {
                   console.log(error);
