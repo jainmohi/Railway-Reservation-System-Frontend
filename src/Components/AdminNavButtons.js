@@ -14,9 +14,9 @@ export default function AdminNavButtons(){
         <div className="col">
         <Link class="btn btn-primary" to={"/getAllUsers"}>See all Users</Link>
         </div>
-        <div className="col">
+        {/* <div className="col">
         <Link class="btn btn-primary" to={"/addTrain"}>Add Train</Link>
-        </div>
+        </div> */}
         </div>
     );
 }
